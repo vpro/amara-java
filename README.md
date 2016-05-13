@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.org/vpro/amara-java.svg?)](https://travis-ci.org/vpro/amara-java)
 
 
-This is a simple java client for the amara project (http://www.amara.org/). The API is documented [here]([https://amara.org/api/ "Amara API documentation) (You need to be logged in)
+This is a simple java client for the amara project (http://www.amara.org/). The API is documented [here](https://amara.org/api/ "Amara API documentation") (You need to be logged in)
  
 
 ##How to use
