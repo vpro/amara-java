@@ -9,6 +9,10 @@ This is a simple java client for the amara project (http://www.amara.org/). It i
  
  
  ```java
+import nl.vpro.amara.domain.*;
+import nl.vpro.amara.Client;
+ ...
+
  
   Client amaraClient = new Client.Builder()
                  .url(getRequiredConfig("amara.api.url"))
