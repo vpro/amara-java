@@ -17,7 +17,7 @@ This is a simple java client for the amara project (http://www.amara.org/). The 
                  .team(getRequiredConfig("amara.api.team"))
                  .build();
                  
-   Activity amaraActivity = Config.getAmaraClient().getActivity("5036197");
+   Activity amaraActivity = Config.getAmaraClient().activities().get("5036197");
  ```
 
 
