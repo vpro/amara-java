@@ -17,7 +17,12 @@ This is a simple java client for the amara project (http://www.amara.org/). The 
                  .team(getRequiredConfig("amara.api.team"))
                  .build();
                  
-   Activity amaraActivity = Config.getAmaraClient().activities().get("5036197");
+   Activity amaraActivity = amaraClient.activities().get("5036197");
+   
+   Video amaraVideo = amaraClient.videos().get("FSW0qzp2Enlk"); 
+   
+   List<Activity> amaraActivities = amaraClient.activity().list(Activity.TYPE_APPROVE_VERSION, now - afterTimestampInSeconds).getActivities();
+
  ```
 
 
