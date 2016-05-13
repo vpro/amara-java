@@ -1,19 +1,14 @@
 package nl.vpro.amara.domain;
 
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import nl.vpro.amara_poms.Config;
 
 /**
  * @author joost
- * @todo static methods should not be in domain
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Subtitles {
@@ -75,24 +70,6 @@ public class Subtitles {
         this.description = description;
         this.action = action;
     }
-
-    public String getSubtitleFilepath(String filename) {
-        String basePath = Config.getRequiredConfig("subtitle.basepath");
-
-        basePath += language.getCode() + "/" + filename;
-
-        return basePath;
-    }
-
-    public void writeSubtitlesToFiles(String pomsMid) throws FileNotFoundException {
-        try(PrintWriter out = new PrintWriter(getSubtitleFilepath(pomsMid))){
-            out.println(subtitles);
-        }
-    }
-
-
-
-
 
 
 

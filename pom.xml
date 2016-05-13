@@ -1,44 +1,61 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>nl.vpro.amara_poms</groupId>
-  <artifactId>amara_poms_publisher</artifactId>
-  <version>1.3-SNAPSHOT</version>
-
+  <groupId>nl.vpro.amara</groupId>
+  <artifactId>amara-java</artifactId>
+  <version>0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>amara_publisher</name>
-  <url>http://maven.apache.org</url>
+
+  <licenses>
+    <license>
+      <name>GPLv3</name>
+      <url>http://www.gnu.org/licenses/gpl-3.0.txt</url>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>mihxil</id>
+      <name>Michiel Meeuwissen</name>
+      <email>michiel.meeuwissen+github@gmail.com</email>
+      <url>http://www.meeuw.org</url>
+      <roles>
+        <role>architect</role>
+        <role>developer</role>
+      </roles>
+      <timezone>Europe/Amsterdam</timezone>
+    </developer>
+    <developer>
+      <id>joost</id>
+      <name>Joost Aafjes</name>
+      <email>joost@knijter.nl</email>
+      <roles>
+        <role>architect</role>
+        <role>developer</role>
+      </roles>
+      <timezone>Europe/Amsterdam</timezone>
+    </developer>
+  </developers>
 
 
   <scm>
-    <connection>scm:git:git://git@github.com/vpro/amara-poms.git</connection>
-    <developerConnection>scm:git:git@github.com:vpro/amara-poms.git</developerConnection>
-    <url>https://github.com/vpro/amara-poms</url>
+    <connection>scm:git:git://git@github.com/vpro/amara-java.git</connection>
+    <developerConnection>scm:git:git@github.com:vpro/amara-java.git</developerConnection>
+    <url>https://github.com/vpro/amara-pomjava</url>
     <tag>HEAD</tag>
   </scm>
 
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <api.client.version>4.4-SNAPSHOT</api.client.version>
     <jackson2.version>2.7.4</jackson2.version>
     <spring.version>4.2.6.RELEASE</spring.version>
   </properties>
 
 
   <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.12</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>nl.vpro.api-client</groupId>
-      <artifactId>media-backend-rs-client</artifactId>
-      <version>${api.client.version}</version>
-    </dependency>
+
     <dependency>
       <groupId>javax.el</groupId>
       <artifactId>javax.el-api</artifactId>
@@ -74,11 +91,16 @@
     </dependency>
 
     <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-csv</artifactId>
-      <version>1.2</version>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-jsr310</artifactId>
+      <version>${jackson2.version}</version>
     </dependency>
-
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
     <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
@@ -88,28 +110,8 @@
 
   </dependencies>
 
-  <repositories>
-    <repository>
-      <id>nexusvpro</id>
-      <url>http://nexus.vpro.nl/content/groups/public</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
-  </repositories>
-
-  <distributionManagement>
-    <repository>
-      <id>localfilesmv</id>
-      <url>file://${project.basedir}/releases</url>
-    </repository>
-  </distributionManagement>
-
   <build>
-    <defaultGoal>install</defaultGoal>
+    <defaultGoal>deploy</defaultGoal>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -121,35 +123,107 @@
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-shade-plugin</artifactId>
-        <version>2.4.3</version>
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <goals>
-              <goal>shade</goal>
-            </goals>
-            <configuration>
-              <transformers>
-                <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
-                  <resource>META-INF/spring.handlers</resource>
-                </transformer>
-             <!--   <transformer implementation="org.springframework.boot.maven.PropertiesMergingResourceTransformer">
-                  <resource>META-INF/spring.factories</resource>
-                </transformer>-->
-                <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
-                  <resource>META-INF/spring.schemas</resource>
-                </transformer>
-                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
-                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                  <mainClass>nl.vpro.amara_poms.App</mainClass>
-                </transformer>
-              </transformers>
-            </configuration>
-          </execution>
-        </executions>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.3.2</version>
+        <configuration>
+          <archive>
+            <manifestEntries>
+              <ProjectVersion>${project.version}</ProjectVersion>
+            </manifestEntries>
+          </archive>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>2.5.2</version>
+        <configuration>
+          <branchName>${project.version}</branchName>
+          <tagNameFormat>@{project.version}</tagNameFormat>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.10.1</version>
+        <configuration>
+          <failOnError>false</failOnError>
+          <additionalparam>-Xdoclint:none</additionalparam>
+        </configuration>
       </plugin>
     </plugins>
   </build>
+
+
+  <profiles>
+    <profile>
+      <id>deploy</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.sonatype.plugins</groupId>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
+            <version>1.6.5</version>
+            <extensions>true</extensions>
+            <configuration>
+              <serverId>ossrh</serverId>
+              <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+              <autoReleaseAfterClose>true</autoReleaseAfterClose>
+            </configuration>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.6</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <version>2.4</version>
+            <executions>
+              <execution>
+                <id>attach-sources</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>2.10.3</version>
+            <executions>
+              <execution>
+                <id>attach-javadocs</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+    <repository>
+      <id>ossrh-release</id>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+  </distributionManagement>
 
 </project>
