@@ -415,6 +415,10 @@ public class Client {
         return builder.build().encode().toUri();
     }
 
+    @Override
+    public String toString() {
+        return "AmaraClient(" + username + "@" + amaraUrl + ")";
+    }
 
     public static class Builder  {
         private String amaraUrl;
