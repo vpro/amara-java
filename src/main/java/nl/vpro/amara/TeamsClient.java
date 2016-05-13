@@ -15,11 +15,13 @@ import nl.vpro.amara.domain.Task;
 import nl.vpro.amara.domain.TaskCollection;
 
 /**
+ * Returned by Client#teams(). No need to instantiate this yourself.
  * @author Michiel Meeuwissen
  * @since 1.0
  */
 public class TeamsClient extends SubClient {
-    protected TeamsClient(Client client) {
+    
+    TeamsClient(Client client) {
         super(client, "teams");
     }
 

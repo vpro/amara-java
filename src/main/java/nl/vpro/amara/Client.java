@@ -1,13 +1,11 @@
 package nl.vpro.amara;
 
-import java.net.URI;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 
 // why spring?
-import org.springframework.http.*;
-import org.springframework.web.util.UriComponentsBuilder;
 
 /**
  * A java-client for AMARA (See http://www.amara.org).

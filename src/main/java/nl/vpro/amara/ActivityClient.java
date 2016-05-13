@@ -9,14 +9,16 @@ import nl.vpro.amara.domain.Activity;
 import nl.vpro.amara.domain.ActivityCollection;
 
 /**
+ * Returned by Client#activity(). No need to instantiate this yourself.
  * @author Michiel Meeuwissen
  * @since 1.0
  */
 public class ActivityClient extends SubClient {
-    protected ActivityClient(Client client) {
+    
+    
+    ActivityClient(Client client) {
         super(client, "activity");
     }
-
 
     public Activity get(String activity_id) {
         URI uri = uri(builder()

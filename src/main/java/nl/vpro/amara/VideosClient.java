@@ -19,14 +19,14 @@ import nl.vpro.amara.domain.Subtitles;
 import nl.vpro.amara.domain.Video;
 
 /**
+ * Returned by Client#videos(). No need to instantiate this yourself.
+
  * @author Michiel Meeuwissen
  * @since 1.0
  */
 public class VideosClient extends SubClient {
 
-    private final static Logger LOG = LoggerFactory.getLogger(Client.class);
-
-    protected VideosClient(Client client) {
+    VideosClient(Client client) {
         super(client, "videos");
     }
 
