@@ -302,8 +302,7 @@ public class Client {
 //            }
         } catch (HttpClientErrorException e) {
             LOG.info(e.toString());
-            String responseBody = e.getResponseBodyAsString();
-            LOG.info(responseBody);
+            LOG.info(e.getResponseBodyAsString());
         }
 
         return amaraSubtitleActionOut;
