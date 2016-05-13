@@ -2,10 +2,11 @@
 [![Build Status](https://travis-ci.org/vpro/amara-java.svg?)](https://travis-ci.org/vpro/amara-java)
 
 
-This is a simple java client for the amara project (http://www.amara.org/):
+This is a simple java client for the amara project (http://www.amara.org/).
  
+
+ ##How to use
  
- ##How to use:
  
  ```java
  
