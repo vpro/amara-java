@@ -13,14 +13,31 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class VideoMetadata {
 
     @JsonProperty("speaker-name")
-    public String speaker_name;
-    public String location; // set Poms mid
+    private String speaker_name;
+    private  String location; // set Poms mid
 
     public VideoMetadata() {
     }
 
     public VideoMetadata(String speaker_name, String location) {
         this.speaker_name = speaker_name;
+        this.location = location;
+    }
+
+
+    public String getSpeaker_name() {
+        return speaker_name;
+    }
+
+    public void setSpeaker_name(String speaker_name) {
+        this.speaker_name = speaker_name;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
         this.location = location;
     }
 

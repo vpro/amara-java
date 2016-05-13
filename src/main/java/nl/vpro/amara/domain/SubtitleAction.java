@@ -8,7 +8,7 @@ public class SubtitleAction {
     final public static String ACTION_COMPLETE = "complete";
     final public static String ACTION_APPROVE = "approve";
 
-    public String action; // only used to approve nl subtitle
+    private String action; // only used to approve nl subtitle
 
     public SubtitleAction() {
     }
@@ -17,4 +17,12 @@ public class SubtitleAction {
         this.action = action;
     }
 
+
+    public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
+    }
 }

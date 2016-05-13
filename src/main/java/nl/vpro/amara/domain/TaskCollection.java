@@ -18,7 +18,7 @@ public class TaskCollection {
 
     private final static Logger LOG = LoggerFactory.getLogger(TaskCollection.class);
 
-    public Meta meta;
+    Meta meta;
 
     @JsonProperty("objects")
     List<Task> tasks;
