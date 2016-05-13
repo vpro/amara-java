@@ -2,13 +2,17 @@
 [![Build Status](https://travis-ci.org/vpro/amara-java.svg?)](https://travis-ci.org/vpro/amara-java)
 
 
-This is a simple java client for the amara project (http://www.amara.org/). The API is documented [here](https://amara.org/api/ "Amara API documentation") (You need to be logged in)
+This is a simple java client for the amara project (http://www.amara.org/). It isn't yet complete, but methods can easilty be added. The API itself is documented [here](https://amara.org/api/ "Amara API documentation") (You need to be logged in)
  
 
 ##How to use
  
  
  ```java
+import nl.vpro.amara.domain.*;
+import nl.vpro.amara.Client;
+ ...
+
  
   Client amaraClient = new Client.Builder()
                  .url(getRequiredConfig("amara.api.url"))
@@ -17,7 +21,12 @@ This is a simple java client for the amara project (http://www.amara.org/). The 
                  .team(getRequiredConfig("amara.api.team"))
                  .build();
                  
-   Activity amaraActivity = Config.getAmaraClient().activities().get("5036197");
+   Activity amaraActivity = amaraClient.activities().get("5036197");
+   
+   Video amaraVideo = amaraClient.videos().get("FSW0qzp2Enlk"); 
+   
+   List<Activity> amaraActivities = amaraClient.activity().list(Activity.TYPE_APPROVE_VERSION, now - afterTimestampInSeconds).getActivities();
+
  ```
 
 
