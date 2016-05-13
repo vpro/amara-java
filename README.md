@@ -2,12 +2,13 @@
 [![Build Status](https://travis-ci.org/vpro/amara-java.svg?)](https://travis-ci.org/vpro/amara-java)
 
 
-This is a simple java client for the amara project (http://www.amara.org/):
+This is a simple java client for the amara project (http://www.amara.org/).
+ 
+
+##How to use
  
  
- ## How to use:
- 
- '''java
+ ```java
  
   Client amaraClient = new Client.Builder()
                  .url(getRequiredConfig("amara.api.url"))
@@ -17,7 +18,7 @@ This is a simple java client for the amara project (http://www.amara.org/):
                  .build();
                  
    Activity amaraActivity = Config.getAmaraClient().getActivity("5036197");
- '''
+ ```
 
 
 ##Installation
