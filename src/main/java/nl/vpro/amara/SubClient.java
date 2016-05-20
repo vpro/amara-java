@@ -10,9 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import nl.vpro.amara.domain.Action;
 import nl.vpro.amara.domain.Subtitles;
-import nl.vpro.amara.domain.Task;
 
 /**
  * @author Michiel Meeuwissen
@@ -34,10 +32,10 @@ public abstract class SubClient {
     protected UriComponentsBuilder builder() {
         return UriComponentsBuilder
             .fromHttpUrl(client.getAmaraUrl())
-            .fragment("api")
-            .fragment(path);
+            .pathSegment("api")
+            .pathSegment(path);
     }
-    
+
     protected <T> ResponseEntity<T> get(URI uri, Class<T> clazz) {
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<Subtitles> request = new HttpEntity<>(client.getGetHeaders());
