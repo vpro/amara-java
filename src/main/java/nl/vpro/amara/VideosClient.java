@@ -4,8 +4,6 @@ import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -84,13 +82,13 @@ public class VideosClient extends SubClient {
     public List<Action> getActions(String video_id, String language_code) {
         URI uri = builder()
             .pathSegment(
-                video_id, 
+                video_id,
                 "languages",
                 language_code,
                 "subtitles",
                 "actions")
             .build().encode().toUri();
-        
+
         ResponseEntity<Action[]> response = get(uri, Action[].class);
 
         Action[] body = response.getBody();
@@ -145,7 +143,7 @@ public class VideosClient extends SubClient {
             //                    .queryParam("team", Config.getRequiredConfig("amara.api.team"))
                 .queryParam("sub_format", format)
                 .build().encode().toUri();
-            
+
             ResponseEntity<Subtitles> response = get(uri, Subtitles.class);
 
             if (response.getStatusCode() == HttpStatus.OK) {
@@ -176,17 +174,18 @@ public class VideosClient extends SubClient {
         Video amaraVideoOut = null;
 
         try {
-            URI uri = uri(builder());
-            
+            URI uri = uri(builder().path("/"));
+
             ResponseEntity<Video> response = post(uri, amaraVideoIn, Video.class);
 
             if (response.getStatusCode() == HttpStatus.CREATED) {
                 amaraVideoOut = response.getBody();
+            } else {
+                LOG.warn("No video created for {}. Status code: {} {}", amaraVideoIn, response.getStatusCode(), response.toString());
             }
         } catch (HttpClientErrorException e) {
-            LOG.info("For " + amaraVideoIn + ":" + e.getMessage());
-            String responseBody = e.getResponseBodyAsString();
-            LOG.info(responseBody);
+            LOG.error("For " + amaraVideoIn + ":" + e.getMessage());
+            LOG.error(e.getResponseBodyAsString());
         }
 
         return amaraVideoOut;
@@ -214,5 +213,5 @@ public class VideosClient extends SubClient {
 
         return amaraSubtitleActionOut;
     }
- 
+
 }
