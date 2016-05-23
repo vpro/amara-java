@@ -198,6 +198,7 @@ public class VideosClient extends SubClient {
             URI uri = uri(
                 builder()
                 .pathSegment(video_id, "languages", language_code, "subtitles", "actions")
+                .path("/")
             );
 
             ResponseEntity<SubtitleAction> response = post(uri, amaraSubtitleAction, SubtitleAction.class);
