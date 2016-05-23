@@ -60,7 +60,8 @@ public class VideosClient extends SubClient {
         try {
             URI uri = builder()
                 .pathSegment(video_id, "languages", language_code, "subtitles")
-                .queryParam(client.getTeam())
+                .path("/")
+                .queryParam("team", client.getTeam())
                 .build().encode().toUri();
 
             // do request
@@ -128,7 +129,6 @@ public class VideosClient extends SubClient {
     }
 
 
-    // DOESN'T WORK BECAUSE SUBTITLE ARE ALSO IN JSON FORMAT - to get it working a more detailed model is needed
     public Subtitles getSubtitles(String video_id, String language_code, String format) {
 
         Subtitles amaraSubtitlesOut = null;
@@ -140,7 +140,7 @@ public class VideosClient extends SubClient {
                     "languages",
                     language_code,
                     "subtitles")
-            //                    .queryParam("team", Config.getRequiredConfig("amara.api.team"))
+            //                    .queryParam("team", client.getTeam())
                 .queryParam("sub_format", format)
                 .build().encode().toUri();
 
