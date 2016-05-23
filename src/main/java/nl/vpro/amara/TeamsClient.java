@@ -1,6 +1,7 @@
 package nl.vpro.amara;
 
 import java.net.URI;
+import java.time.Instant;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class TeamsClient extends SubClient {
         super(client, "teams");
     }
 
-    public TaskCollection getTasks(String taskType, long afterTimestampInSeconds) {
+    public TaskCollection getTasks(String taskType, Instant after) {
 
         URI uri = uri(
             tasks()
@@ -29,7 +30,7 @@ public class TeamsClient extends SubClient {
                 .queryParam("type", taskType)
                 .queryParam("limit", 300)
                 .queryParam("completed")
-                .queryParam("completed-after", afterTimestampInSeconds));
+                .queryParam("completed-after", after.toEpochMilli() / 1000));
 
         ResponseEntity<TaskCollection> response = get(uri, TaskCollection.class);
         TaskCollection tasks = response.getBody();
