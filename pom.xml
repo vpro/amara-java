@@ -46,7 +46,7 @@
   <scm>
     <connection>scm:git:git://git@github.com/vpro/amara-java.git</connection>
     <developerConnection>scm:git:git@github.com:vpro/amara-java.git</developerConnection>
-    <url>https://github.com/vpro/amara-pomjava</url>
+    <url>https://github.com/vpro/amara-java</url>
     <tag>HEAD</tag>
   </scm>
 
