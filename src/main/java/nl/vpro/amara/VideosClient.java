@@ -56,13 +56,13 @@ public class VideosClient extends SubClient {
     public Subtitles post(Subtitles amaraSubtitlesIn, String video_id, String language_code) {
 
         Subtitles amaraSubtitlesOut = null;
-
+        URI uri = builder()
+            .pathSegment(video_id, "languages", language_code, "subtitles")
+            .path("/")
+            .queryParam("team", client.getTeam())
+            .build().encode().toUri();
         try {
-            URI uri = builder()
-                .pathSegment(video_id, "languages", language_code, "subtitles")
-                .path("/")
-                .queryParam("team", client.getTeam())
-                .build().encode().toUri();
+           
 
             // do request
             RestTemplate restTemplate = new RestTemplate();
@@ -71,9 +71,11 @@ public class VideosClient extends SubClient {
 
             if (response.getStatusCode() == HttpStatus.CREATED) {
                 amaraSubtitlesOut = response.getBody();
+            } else {
+                LOG.error("Status code for {} is {}", uri, response.getStatusCode());
             }
         } catch (HttpClientErrorException e) {
-            LOG.error("{}:{}", e.getMessage(), e.getResponseBodyAsString());
+            LOG.error("{} : {}:{}", uri,  e.getMessage(), e.getResponseBodyAsString());
         }
 
         return amaraSubtitlesOut;
