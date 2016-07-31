@@ -46,14 +46,14 @@
   <scm>
     <connection>scm:git:git://git@github.com/vpro/amara-java.git</connection>
     <developerConnection>scm:git:git@github.com:vpro/amara-java.git</developerConnection>
-    <url>https://github.com/vpro/amara-pomjava</url>
+    <url>https://github.com/vpro/amara-java</url>
     <tag>HEAD</tag>
   </scm>
 
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <jackson2.version>2.7.4</jackson2.version>
+    <jackson2.version>2.8.0</jackson2.version>
     <spring.version>4.2.6.RELEASE</spring.version>
   </properties>
 
