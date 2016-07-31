@@ -174,9 +174,8 @@ public class VideosClient extends SubClient {
     public Video post(Video amaraVideoIn) {
 
         Video amaraVideoOut = null;
-
+        URI uri = uri(builder().path("/"));
         try {
-            URI uri = uri(builder().path("/"));
 
             ResponseEntity<Video> response = post(uri, amaraVideoIn, Video.class);
 
@@ -185,8 +184,8 @@ public class VideosClient extends SubClient {
             } else {
                 LOG.warn("No video created for {}. Status code: {} {}", amaraVideoIn, response.getStatusCode(), response.toString());
             }
-        } catch (HttpClientErrorException e) {
-            LOG.error("For " + amaraVideoIn + ":" + e.getMessage());
+        } catch (HttpClientErrorException | org.springframework.web.client.HttpServerErrorException e) {
+            LOG.error("For " + uri + " " + toString(amaraVideoIn) + ":" + e.getMessage());
             LOG.error(e.getResponseBodyAsString());
         }
 

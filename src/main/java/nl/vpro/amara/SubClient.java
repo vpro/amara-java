@@ -10,6 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import nl.vpro.amara.domain.Subtitles;
 
 /**
@@ -49,5 +52,17 @@ public abstract class SubClient {
     }
     protected URI uri(UriComponentsBuilder builder) {
         return builder.build().encode().toUri();
+    }
+    
+    protected <T> String toString(T object) {
+        if (object == null) {
+            return "NULL";
+        } else {
+            try {
+                return new ObjectMapper().writerFor(object.getClass()).writeValueAsString(object);
+            } catch (JsonProcessingException e) {
+                return object.toString() + " (" + e.getMessage() + ")";
+            }
+        }
     }
 }
