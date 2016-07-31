@@ -1,7 +1,6 @@
 package nl.vpro.amara;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
@@ -10,7 +9,6 @@ import org.junit.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import nl.vpro.amara.domain.Language;
 import nl.vpro.amara.domain.Subtitles;
 import nl.vpro.amara.domain.Video;
 
@@ -36,10 +34,10 @@ public class VideosClientTest {
         "  \"project\" : \"current\"\n" +
         "}";
 
-    static Properties properties = new Properties();
+    static final Properties PROPERTIES = new Properties();
     static {
         try {
-            properties.load(new FileReader(new File(System.getProperty("user.home") + "/conf/amara.properties")));
+            PROPERTIES.load(new FileReader(new File(System.getProperty("user.home") + "/conf/amara.properties")));
         } catch (IOException e) {
             throw new IllegalStateException(e);
         }
@@ -49,7 +47,7 @@ public class VideosClientTest {
         .url("https://staging.amara.org/")
         .team("netinnederland-staging")
         .user("netinnl")
-        .apiKey(properties.getProperty("apiKey"))
+        .apiKey(PROPERTIES.getProperty("apiKey"))
         .build();
     
     @Test
