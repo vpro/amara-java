@@ -49,7 +49,7 @@ public class VideosClientTest {
         .url("https://staging.amara.org/")
         .team("netinnederland-staging")
         .user("netinnl")
-        .apiKey(PROPERTIES.getProperty("apiKey"))
+        .apiKey(PROPERTIES.getProperty("api.key"))
         .build();
 
     @Test
@@ -63,6 +63,7 @@ public class VideosClientTest {
     public void postVideo() throws IOException {
         Video in = new ObjectMapper().readerFor(Video.class).readValue(video);
         //
+        System.out.println(video);
         System.out.println(client.videos().post(in));
 
     }
