@@ -21,6 +21,7 @@ import nl.vpro.amara.domain.Subtitles;
  */
 public abstract class SubClient {
 
+    private ObjectMapper MAPPER = new ObjectMapper();
     protected final Logger LOG = LoggerFactory.getLogger(getClass());
 
 
@@ -46,9 +47,21 @@ public abstract class SubClient {
 
     }
     protected <S, T> ResponseEntity<T> post(URI uri, S in, Class<T> clazz) {
-        RestTemplate restTemplate = new RestTemplate();
-        HttpEntity<S> request = new HttpEntity<>(in, client.getPostHeaders());
-        return restTemplate.exchange(uri, HttpMethod.POST, request, clazz);
+        try {
+            RestTemplate restTemplate = new RestTemplate();
+            HttpEntity<S> request = new HttpEntity<>(in, client.getPostHeaders());
+            return restTemplate.exchange(uri, HttpMethod.POST, request, clazz);
+        } catch (RuntimeException rte) {
+            String object;
+            try {
+                object = MAPPER.writer().writeValueAsString(in);
+            } catch (JsonProcessingException e) {
+                LOG.warn(e.getMessage());
+                object = String.valueOf(in);
+            }
+            LOG.error("For {} posting {} {}", uri, clazz, object);
+            throw rte;
+        }
     }
     protected URI uri(UriComponentsBuilder builder) {
         return builder.build().encode().toUri();

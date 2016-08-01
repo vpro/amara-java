@@ -14,7 +14,7 @@ public class VideoMetadata {
 
     @JsonProperty("speaker-name")
     private String speaker_name;
-    private  String location; // set Poms mid
+    private String location; // set Poms mid
 
     public VideoMetadata() {
     }
