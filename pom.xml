@@ -3,7 +3,7 @@
 
   <groupId>nl.vpro.amara</groupId>
   <artifactId>amara-java</artifactId>
-  <version>0.2-SNAPSHOT</version>
+  <version>0.2</version>
   <packaging>jar</packaging>
 
   <name>amara-java</name>
@@ -47,7 +47,7 @@
     <connection>scm:git:git://git@github.com/vpro/amara-java.git</connection>
     <developerConnection>scm:git:git@github.com:vpro/amara-java.git</developerConnection>
     <url>https://github.com/vpro/amara-java</url>
-    <tag>HEAD</tag>
+    <tag>0.2</tag>
   </scm>
 
 
