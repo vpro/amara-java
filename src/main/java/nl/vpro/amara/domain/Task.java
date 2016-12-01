@@ -25,7 +25,7 @@ public class Task {
     String video_id;
     String language;
     String type;
-    String assignee;
+    User assignee;
 
     int priority;
     Instant completed;
@@ -35,7 +35,7 @@ public class Task {
     public Task() {
     }
 
-    public Task(String video_id, String language, String type, String assignee) {
+    public Task(String video_id, String language, String type, User assignee) {
         this.video_id = video_id;
         this.language = language;
         this.type = type;
@@ -76,11 +76,11 @@ public class Task {
         this.type = type;
     }
 
-    public String getAssignee() {
+    public User getAssignee() {
         return assignee;
     }
 
-    public void setAssignee(String assignee) {
+    public void setAssignee(User assignee) {
         this.assignee = assignee;
     }
 
