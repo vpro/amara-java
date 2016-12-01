@@ -10,6 +10,12 @@ public class User {
     String  username;
     URI uri;
 
+    public static User ofUsername(String username) {
+        User user = new User();
+        user.username = username;
+        return user;
+    }
+    
     public String getId() {
         return id;
     }
