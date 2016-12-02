@@ -14,7 +14,7 @@ import nl.vpro.amara.Client;
  ...
 
  
-  Client amaraClient = new Client.Builder()
+  Client amaraClient = Client.builder()
                  .url(getRequiredConfig("amara.api.url"))
                  .user(getRequiredConfig("amara.api.username"))
                  .apiKey(getRequiredConfig("amara.api.key"))
@@ -39,6 +39,6 @@ Or you can add this to your pom.xml
 <dependency>
   <groupId>nl.vpro.amara</groupId>
   <artifactId>amara-java</artifactId>
-  <version>0.1</version>
+  <version>0.3</version>
 </dependency>
 ```
