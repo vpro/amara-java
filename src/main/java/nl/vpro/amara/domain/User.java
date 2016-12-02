@@ -1,5 +1,7 @@
 package nl.vpro.amara.domain;
 
+import lombok.Builder;
+
 import java.net.URI;
 
 /**
@@ -10,12 +12,17 @@ public class User {
     String  username;
     URI uri;
 
-    public static User ofUsername(String username) {
-        User user = new User();
-        user.username = username;
-        return user;
+    public User() {
+
     }
-    
+    @Builder
+    public User(String id, String username, URI uri) {
+        this.id = id;
+        this.username = username;
+        this.uri = uri;
+    }
+
+
     public String getId() {
         return id;
     }

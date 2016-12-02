@@ -1,14 +1,9 @@
 package nl.vpro.amara;
 
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.Properties;
 
 import org.junit.Ignore;
 import org.junit.Test;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import nl.vpro.amara.domain.Subtitles;
 import nl.vpro.amara.domain.Video;
@@ -36,18 +31,18 @@ public class VideosClientTest extends AbstractClientsTest {
         "  \"project\" : \"current\"\n" +
         "}";
 
- 
+
 
     @Test
     public void postSubtitles() throws IOException {
-        Subtitles in = new ObjectMapper().readerFor(Subtitles.class).readValue(example);
+        Subtitles in = AmaraObjectMapper.INSTANCE.readerFor(Subtitles.class).readValue(example);
 
         System.out.println(client.videos().post(in, "bla", "nl"));
     }
     @Test
     // GIVES 504. I don't know why.
     public void postVideo() throws IOException {
-        Video in = new ObjectMapper().readerFor(Video.class).readValue(video);
+        Video in = AmaraObjectMapper.INSTANCE.readerFor(Video.class).readValue(video);
         //
         System.out.println(video);
         System.out.println(client.videos().post(in));

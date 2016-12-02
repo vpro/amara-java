@@ -19,7 +19,7 @@ public class AbstractClientsTest {
         }
     }
 
-    Client client = new Client.Builder()
+    Client client = Client.builder()
         //.url("https://amara.org/")
         .url("https://amara.org/")
         .team("netinnederland")

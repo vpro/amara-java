@@ -11,7 +11,6 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import nl.vpro.amara.domain.Subtitles;
 
@@ -21,7 +20,6 @@ import nl.vpro.amara.domain.Subtitles;
  */
 public abstract class SubClient {
 
-    private ObjectMapper MAPPER = new ObjectMapper();
     protected final Logger LOG = LoggerFactory.getLogger(getClass());
 
 
@@ -54,7 +52,7 @@ public abstract class SubClient {
         } catch (RuntimeException rte) {
             String object;
             try {
-                object = MAPPER.writer().writeValueAsString(in);
+                object = AmaraObjectMapper.INSTANCE.writer().writeValueAsString(in);
             } catch (JsonProcessingException e) {
                 LOG.warn(e.getMessage());
                 object = String.valueOf(in);
@@ -66,13 +64,13 @@ public abstract class SubClient {
     protected URI uri(UriComponentsBuilder builder) {
         return builder.build().encode().toUri();
     }
-    
+
     protected <T> String toString(T object) {
         if (object == null) {
             return "NULL";
         } else {
             try {
-                return new ObjectMapper().writerFor(object.getClass()).writeValueAsString(object);
+                return AmaraObjectMapper.INSTANCE.writerFor(object.getClass()).writeValueAsString(object);
             } catch (JsonProcessingException e) {
                 return object.toString() + " (" + e.getMessage() + ")";
             }

@@ -2,21 +2,18 @@ package nl.vpro.amara.domain;
 
 import java.time.Instant;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import nl.vpro.amara.domain.json.UserJson;
 
 /**
  * @author joost
-
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Task {
-
-
-    private final static Logger LOG = LoggerFactory.getLogger(Task.class);
 
     public final static String TYPE_TRANSLATE = "Translate";
 
@@ -25,6 +22,9 @@ public class Task {
     String video_id;
     String language;
     String type;
+
+    @JsonSerialize(using = UserJson.Serializer.class)
+    @JsonDeserialize(using = UserJson.Deserializer.class)
     User assignee;
 
     int priority;

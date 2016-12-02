@@ -6,8 +6,7 @@ import java.io.StringReader;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import nl.vpro.amara.AmaraObjectMapper;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -18,12 +17,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
  */
 @Ignore
 public class TaskCollectionTest {
-    ObjectMapper mapper = new ObjectMapper();
-    {
-       
-        mapper.registerModule(new JavaTimeModule());
-    }
-    
+
+
     String example = "{\n" +
         "  \"meta\" : {\n" +
         "    \"previous\" : null,\n" +
@@ -49,13 +44,13 @@ public class TaskCollectionTest {
         "    \"approved\" : \"Approved\",\n" +
         "    \"resource_uri\" : \"https://amara.org/api/teams/netinnederland/tasks/1803899/\"\n" +
         "  }]}";
-    
-    
+
+
     @Test
     public void json() throws IOException {
-        TaskCollection collection = mapper.readerFor(TaskCollection.class).readValue(new StringReader(example));
+        TaskCollection collection = AmaraObjectMapper.INSTANCE.readerFor(TaskCollection.class).readValue(new StringReader(example));
         assertThat(collection.getTasks().get(0).getAssignee().getUri().toString()).isEqualTo("https://amara.org/api/users/id$WsywnFE7KZ1gJQOHSEFoXaq8xGpqCnjBKudT2wdOYdU/");
     }
-    
+
 
 }
