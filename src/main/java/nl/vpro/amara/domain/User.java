@@ -1,12 +1,14 @@
 package nl.vpro.amara.domain;
 
 import lombok.Builder;
+import lombok.ToString;
 
 import java.net.URI;
 
 /**
  * @author Michiel Meeuwissen
  */
+@ToString
 public class User {
     String id;
     String  username;
