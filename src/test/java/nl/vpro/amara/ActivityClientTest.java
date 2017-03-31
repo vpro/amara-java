@@ -26,16 +26,6 @@ public class ActivityClientTest extends AbstractClientsTest {
 
     }
     
-    @Test
-    public void getTasks() {
-        Duration duration = Duration.ofDays(5);
-        System.out.println(duration);
-        Instant after = Instant.now().minus(duration);
-        List<Task> approve = client.teams().getTasks("Approve", after).getTasks();
-        for (Task t: approve) {
-            System.out.println(t);
-        }
-    }
     
     
 }

@@ -2,6 +2,8 @@ package nl.vpro.amara;
 
 import java.net.URI;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,22 +24,37 @@ public class TeamsClient extends SubClient {
         super(client, "teams");
     }
 
-    public TaskCollection getTasks(String taskType, Instant after) {
-
+    public TaskCollection getTasks(TaskType taskType, Instant after, int offset, int limit) {
+        
+        
         URI uri = uri(
             tasks()
                 .path("/")
-                .queryParam("type", taskType)
-                .queryParam("limit", 300)
+                .queryParam("type", taskType.name())
+                .queryParam("limit", limit)
+                .queryParam("offset", offset)
                 .queryParam("completed")
                 .queryParam("completed-after", after.toEpochMilli() / 1000));
-
+        
         ResponseEntity<TaskCollection> response = get(uri, TaskCollection.class);
         TaskCollection tasks = response.getBody();
-
         HttpStatus httpStatus = response.getStatusCode();
-//        logger.info(String.valueOf(response));
-
+        return tasks;
+    }
+    
+    public List<Task> getTasks(TaskType taskType, Instant after) {
+        final List<Task> tasks = new ArrayList<>();
+        final int batchSize = 100;
+        int offset = 0;
+        while(true) {
+            TaskCollection sub = getTasks(taskType, after, offset, batchSize);
+            tasks.addAll(sub.getTasks());
+            if (sub.getTasks().size() == 0
+                || sub.getMeta().getTotal_count() == tasks.size()) {
+                break;
+            }
+            offset += batchSize;
+        }
         return tasks;
     }
 
