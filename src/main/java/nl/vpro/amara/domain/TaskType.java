@@ -1,9 +1,11 @@
-package nl.vpro.amara;
+package nl.vpro.amara.domain;
 
 /**
  * @author Michiel Meeuwissen
  */
 public enum TaskType {
     
-    Approve
+    Approve,
+    Translate
+    
 }

@@ -14,14 +14,13 @@ import nl.vpro.amara.domain.json.UserJson;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Task {
-
-    public final static String TYPE_TRANSLATE = "Translate";
+     
 
     public final static String TASK_APPROVED = "Approved";
 
     String video_id;
     String language;
-    String type;
+    TaskType type;
 
     @JsonSerialize(using = UserJson.Serializer.class)
     @JsonDeserialize(using = UserJson.Deserializer.class)
@@ -35,7 +34,7 @@ public class Task {
     public Task() {
     }
 
-    public Task(String video_id, String language, String type, User assignee) {
+    public Task(String video_id, String language, TaskType type, User assignee) {
         this.video_id = video_id;
         this.language = language;
         this.type = type;
@@ -68,11 +67,11 @@ public class Task {
         this.language = language;
     }
 
-    public String getType() {
+    public TaskType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(TaskType type) {
         this.type = type;
     }
 

@@ -10,6 +10,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import nl.vpro.amara.domain.Task;
+import nl.vpro.amara.domain.TaskType;
 
 /**
  * @author Michiel Meeuwissen

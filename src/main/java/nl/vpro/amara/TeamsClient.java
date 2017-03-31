@@ -12,6 +12,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import nl.vpro.amara.domain.Task;
 import nl.vpro.amara.domain.TaskCollection;
+import nl.vpro.amara.domain.TaskType;
 
 /**
  * Returned by Client#teams(). No need to instantiate this yourself.
