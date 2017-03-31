@@ -2,16 +2,14 @@ package nl.vpro.amara;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.List;
+import java.util.Iterator;
 
 import org.junit.Ignore;
 import org.junit.Test;
 
 import nl.vpro.amara.domain.Task;
-import nl.vpro.amara.domain.TaskCollection;
 
 /**
  * @author Michiel Meeuwissen
@@ -27,11 +25,13 @@ public class TeamsClientTest extends AbstractClientsTest {
         Duration duration = Duration.ofDays(10);
         System.out.println(duration);
         Instant after = Instant.now().minus(duration);
-        List<Task> approve = client
+        Iterator<Task> approve = client
             .teams().getTasks(TaskType.Approve, after);
-        for (Task t : approve) {
-            log.info("Found task {}", t);
+        int count = 0;
+        while(approve.hasNext()) {
+            count++;
+            log.info("Found task {}", approve.next());
         }
-        log.info("Found {}", approve.size());
+        log.info("Found {}", count);
     }
 }

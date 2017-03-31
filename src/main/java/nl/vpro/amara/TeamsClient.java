@@ -2,8 +2,8 @@ package nl.vpro.amara;
 
 import java.net.URI;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,20 +42,34 @@ public class TeamsClient extends SubClient {
         return tasks;
     }
     
-    public List<Task> getTasks(TaskType taskType, Instant after) {
-        final List<Task> tasks = new ArrayList<>();
+    public Iterator<Task> getTasks(TaskType taskType, Instant after) {
         final int batchSize = 100;
-        int offset = 0;
-        while(true) {
+        
+        return new Iterator<Task>() {
+            int count = 0;
+            int offset = 0;
             TaskCollection sub = getTasks(taskType, after, offset, batchSize);
-            tasks.addAll(sub.getTasks());
-            if (sub.getTasks().size() == 0
-                || sub.getMeta().getTotal_count() == tasks.size()) {
-                break;
+            Iterator<Task> subIterator = sub.getTasks().iterator();
+
+            @Override
+            public boolean hasNext() {
+                return (subIterator.hasNext() || sub.getMeta().getTotal_count() > count) && sub.getTasks().size() > 0;
             }
-            offset += batchSize;
-        }
-        return tasks;
+
+            @Override
+            public Task next() {
+                if (! hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                if (! subIterator.hasNext()) {
+                    offset += batchSize;
+                    sub = getTasks(taskType, after, offset, batchSize);
+                    subIterator = sub.getTasks().iterator();
+                }
+                count++;
+                return subIterator.next();
+            }
+        };
     }
 
     public Task post(Task amaraTaskIn) {
