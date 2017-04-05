@@ -1,9 +1,10 @@
 package nl.vpro.amara;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.net.URI;
 import java.time.Instant;
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,21 +14,23 @@ import org.springframework.web.util.UriComponentsBuilder;
 import nl.vpro.amara.domain.Task;
 import nl.vpro.amara.domain.TaskCollection;
 import nl.vpro.amara.domain.TaskType;
+import nl.vpro.util.BatchedReceiver;
 
 /**
  * Returned by Client#teams(). No need to instantiate this yourself.
  * @author Michiel Meeuwissen
  * @since 1.0
  */
+@Slf4j
 public class TeamsClient extends SubClient {
 
     TeamsClient(Client client) {
         super(client, "teams");
     }
 
-    public TaskCollection getTasks(TaskType taskType, Instant after, int offset, int limit) {
-        
-        
+    public TaskCollection getTasks(TaskType taskType, Instant after, long offset, int limit) {
+
+
         URI uri = uri(
             tasks()
                 .path("/")
@@ -36,41 +39,20 @@ public class TeamsClient extends SubClient {
                 .queryParam("offset", offset)
                 .queryParam("completed")
                 .queryParam("completed-after", after.toEpochMilli() / 1000));
-        
+
         ResponseEntity<TaskCollection> response = get(uri, TaskCollection.class);
         TaskCollection tasks = response.getBody();
+        log.debug("Total size: {}", tasks.getMeta().getTotal_count());
         HttpStatus httpStatus = response.getStatusCode();
         return tasks;
     }
-    
+
     public Iterator<Task> getTasks(TaskType taskType, Instant after) {
-        final int batchSize = 100;
-        
-        return new Iterator<Task>() {
-            int count = 0;
-            int offset = 0;
-            TaskCollection sub = getTasks(taskType, after, offset, batchSize);
-            Iterator<Task> subIterator = sub.getTasks().iterator();
+        return BatchedReceiver.<Task>builder()
+            .batchSize(100)
+            .batchGetter((offset, max) -> getTasks(taskType, after, offset, max).getTasks().iterator())
+            .build();
 
-            @Override
-            public boolean hasNext() {
-                return (subIterator.hasNext() || sub.getMeta().getTotal_count() > count) && sub.getTasks().size() > 0;
-            }
-
-            @Override
-            public Task next() {
-                if (! hasNext()) {
-                    throw new NoSuchElementException();
-                }
-                if (! subIterator.hasNext()) {
-                    offset += batchSize;
-                    sub = getTasks(taskType, after, offset, batchSize);
-                    subIterator = sub.getTasks().iterator();
-                }
-                count++;
-                return subIterator.next();
-            }
-        };
     }
 
     public Task post(Task amaraTaskIn) {
