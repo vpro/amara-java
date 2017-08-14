@@ -27,7 +27,7 @@ public class VideosClientTest extends AbstractClientsTest {
         "    \"location\" : \"WO_NTR_425175\",\n" +
         "    \"speaker-name\" : \"De invloed van de SER\"\n" +
         "  },\n" +
-        "  \"team\" : \"netinnederland-staging\",\n" +
+        "  \"team\" : \"netinnederland\",\n" +
         "  \"project\" : \"current\"\n" +
         "}";
 
