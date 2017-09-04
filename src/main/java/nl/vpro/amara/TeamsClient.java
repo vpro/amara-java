@@ -65,9 +65,9 @@ public class TeamsClient extends SubClient {
                 amaraTaskOut = response.getBody();
             }
         } catch (HttpClientErrorException e) {
-            LOG.info(e.toString());
+            log.info(e.toString());
             String responseBody = e.getResponseBodyAsString();
-            LOG.info(responseBody);
+            log.info(responseBody);
         }
 
         return amaraTaskOut;

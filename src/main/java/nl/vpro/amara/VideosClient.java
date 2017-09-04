@@ -1,5 +1,7 @@
 package nl.vpro.amara;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
@@ -22,6 +24,7 @@ import nl.vpro.amara.domain.Video;
  * @author Michiel Meeuwissen
  * @since 1.0
  */
+@Slf4j
 public class VideosClient extends SubClient {
 
     VideosClient(Client client) {
@@ -62,7 +65,7 @@ public class VideosClient extends SubClient {
             .queryParam("team", client.getTeam())
             .build().encode().toUri();
         try {
-           
+
 
             // do request
             RestTemplate restTemplate = new RestTemplate();
@@ -72,10 +75,10 @@ public class VideosClient extends SubClient {
             if (response.getStatusCode() == HttpStatus.CREATED) {
                 amaraSubtitlesOut = response.getBody();
             } else {
-                LOG.error("Status code for {} is {}", uri, response.getStatusCode());
+                log.error("Status code for {} is {}", uri, response.getStatusCode());
             }
         } catch (HttpClientErrorException e) {
-            LOG.error("{} : {}:{}", uri,  e.getMessage(), e.getResponseBodyAsString());
+            log.error("{} : {}:{}", uri,  e.getMessage(), e.getResponseBodyAsString());
         }
 
         return amaraSubtitlesOut;
@@ -114,7 +117,7 @@ public class VideosClient extends SubClient {
                 .queryParam("format", format)
                 .build().encode().toUri();
             HttpEntity<String> response = get(uri, String.class);
-            LOG.info(response.getBody());
+            log.info(response.getBody());
 
             // // TODO: 09/04/16 fix
 //            if (response.statusCode = HttpStatus.OK) {
@@ -122,9 +125,9 @@ public class VideosClient extends SubClient {
 //            }
 
         } catch (HttpClientErrorException e) {
-            LOG.info(e.toString());
+            log.info(e.toString());
             String responseBody = e.getResponseBodyAsString();
-            LOG.info(responseBody);
+            log.info(responseBody);
         }
 
         return amaraSubtitles;
@@ -152,9 +155,9 @@ public class VideosClient extends SubClient {
                 amaraSubtitlesOut = response.getBody();
             }
         } catch (HttpClientErrorException e) {
-            LOG.info(e.toString());
+            log.info(e.toString());
             String responseBody = e.getResponseBodyAsString();
-            LOG.info(responseBody);
+            log.info(responseBody);
         }
 
         return amaraSubtitlesOut;
@@ -182,11 +185,11 @@ public class VideosClient extends SubClient {
             if (response.getStatusCode() == HttpStatus.CREATED) {
                 amaraVideoOut = response.getBody();
             } else {
-                LOG.warn("No video created for {}. Status code: {} {}", amaraVideoIn, response.getStatusCode(), response.toString());
+                log.warn("No video created for {}. Status code: {} {}", amaraVideoIn, response.getStatusCode(), response.toString());
             }
         } catch (HttpClientErrorException | org.springframework.web.client.HttpServerErrorException e) {
-            LOG.error("For " + uri + " " + toString(amaraVideoIn) + ":" + e.getMessage());
-            LOG.error(e.getResponseBodyAsString());
+            log.error("For " + uri + " " + toString(amaraVideoIn) + ":" + e.getMessage());
+            log.error(e.getResponseBodyAsString());
         }
 
         return amaraVideoOut;
@@ -209,8 +212,8 @@ public class VideosClient extends SubClient {
 //                amaraSubtitleActionOut = response.getBody();
 //            }
         } catch (HttpClientErrorException e) {
-            LOG.info(e.toString());
-            LOG.info(e.getResponseBodyAsString());
+            log.info(e.toString());
+            log.info(e.getResponseBodyAsString());
         }
 
         return amaraSubtitleActionOut;

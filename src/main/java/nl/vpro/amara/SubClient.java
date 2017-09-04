@@ -1,15 +1,14 @@
 package nl.vpro.amara;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.net.URI;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import nl.vpro.amara.domain.Subtitles;
@@ -18,9 +17,9 @@ import nl.vpro.amara.domain.Subtitles;
  * @author Michiel Meeuwissen
  * @since 1.0
  */
+@Slf4j
 public abstract class SubClient {
 
-    protected final Logger LOG = LoggerFactory.getLogger(getClass());
 
 
     protected final Client client;
@@ -54,10 +53,10 @@ public abstract class SubClient {
             try {
                 object = AmaraObjectMapper.INSTANCE.writer().writeValueAsString(in);
             } catch (JsonProcessingException e) {
-                LOG.warn(e.getMessage());
+                log.warn(e.getMessage());
                 object = String.valueOf(in);
             }
-            LOG.error("For {} posting {} {}", uri, clazz, object);
+            log.error("For {} posting {} {}", uri, clazz, object);
             throw rte;
         }
     }

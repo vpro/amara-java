@@ -1,5 +1,7 @@
 package nl.vpro.amara;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 
 import org.junit.Ignore;
@@ -13,6 +15,7 @@ import nl.vpro.amara.domain.Video;
  * @since 0.2
  */
 @Ignore("This is integration test requiring actual key in ~/conf/amara.properties")
+@Slf4j
 public class VideosClientTest extends AbstractClientsTest {
 
     public static String example = "{\"video_url\":\"http://download.omroep.nl/vpro/netinnederland/hasp/WO_NTR_425175.mp4\",\"title\":\"De invloed van de SER // Adviezen en regeringsbeleid\",\"description\":\"De Sociaal Economische Raad (SER) adviseert de regering over belangrijke dingen, zoals de WAO en de ziektekostenwet.\",\"primary_audio_language_code\":\"nl\",\"thumbnail\":\"http://images-test.poms.omroep.nl/image/32071124.jpg\",\"metadata\":{\"location\":\"WO_NTR_425175\",\"speaker-name\":\"De invloed van de SER\"},\"team\":\"netinnederland-staging\",\"project\":\"current\"}";
@@ -47,6 +50,12 @@ public class VideosClientTest extends AbstractClientsTest {
         System.out.println(video);
         System.out.println(client.videos().post(in));
 
+    }
+
+    @Test
+    public void getSubtitles() {
+        Subtitles subtitles = client.videos().getSubtitles("TusUXJhLvSyZ", "ar", "vtt");
+        log.info("" + subtitles);
     }
 
 }
