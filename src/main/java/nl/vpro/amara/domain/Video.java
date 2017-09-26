@@ -1,9 +1,8 @@
 package nl.vpro.amara.domain;
 
-import java.util.regex.Pattern;
+import lombok.extern.slf4j.Slf4j;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.regex.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -13,10 +12,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
+@Slf4j
 public class Video {
-
-    private final static Logger LOG = LoggerFactory.getLogger(Video.class);
-
 
     private String id;
     private String video_url;

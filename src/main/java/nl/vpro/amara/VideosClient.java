@@ -176,14 +176,12 @@ public class VideosClient extends SubClient {
 
     public Video post(Video amaraVideoIn) {
 
-        Video amaraVideoOut = null;
         URI uri = uri(builder().path("/"));
         try {
 
             ResponseEntity<Video> response = post(uri, amaraVideoIn, Video.class);
-
             if (response.getStatusCode() == HttpStatus.CREATED) {
-                amaraVideoOut = response.getBody();
+                return response.getBody();
             } else {
                 log.warn("No video created for {}. Status code: {} {}", amaraVideoIn, response.getStatusCode(), response.toString());
             }
@@ -191,9 +189,9 @@ public class VideosClient extends SubClient {
             log.error("For " + uri + " " + toString(amaraVideoIn) + ":" + e.getMessage());
             log.error(e.getResponseBodyAsString());
         }
-
-        return amaraVideoOut;
+        return null;
     }
+
     public SubtitleAction post(SubtitleAction amaraSubtitleAction, String video_id, String language_code) {
 
         SubtitleAction amaraSubtitleActionOut = null;
@@ -201,8 +199,8 @@ public class VideosClient extends SubClient {
         try {
             URI uri = uri(
                 builder()
-                .pathSegment(video_id, "languages", language_code, "subtitles", "actions")
-                .path("/")
+                    .pathSegment(video_id, "languages", language_code, "subtitles", "actions")
+                    .path("/")
             );
 
             ResponseEntity<SubtitleAction> response = post(uri, amaraSubtitleAction, SubtitleAction.class);

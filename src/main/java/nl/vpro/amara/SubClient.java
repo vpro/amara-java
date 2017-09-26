@@ -20,8 +20,6 @@ import nl.vpro.amara.domain.Subtitles;
 @Slf4j
 public abstract class SubClient {
 
-
-
     protected final Client client;
     private final String path;
 
