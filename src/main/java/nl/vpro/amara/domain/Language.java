@@ -1,5 +1,7 @@
 package nl.vpro.amara.domain;
 
+import java.util.Locale;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
@@ -43,6 +45,10 @@ public class Language {
 
     public void setLtr(String ltr) {
         this.ltr = ltr;
+    }
+
+    public Locale toLocale() {
+        return new Locale(code);
     }
 
 }
