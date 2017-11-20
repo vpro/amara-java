@@ -20,9 +20,9 @@ public class AbstractClientsTest {
     }
 
     Client client = Client.builder()
-        .url("https://amara.org/")
-        .team("netinnederland")
-        .user("netinnl")
+        .url(PROPERTIES.getProperty("amara.api.url", "https://amara.org/"))
+        .team(PROPERTIES.getProperty("amara.api.team", "netinnederland"))
+        .user(PROPERTIES.getProperty("amara.api.user", "netinnl"))
         .apiKey(PROPERTIES.getProperty("amara.api.key"))
         .build();
 }
