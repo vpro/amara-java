@@ -27,7 +27,7 @@ import nl.vpro.amara.domain.Video;
 @Slf4j
 public class VideosClient extends SubClient {
 
-    VideosClient(Client client) {
+    public VideosClient(Client client) {
         super(client, "videos");
     }
 
@@ -65,8 +65,6 @@ public class VideosClient extends SubClient {
             .queryParam("team", client.getTeam())
             .build().encode().toUri();
         try {
-
-
             // do request
             RestTemplate restTemplate = new RestTemplate();
             HttpEntity<Subtitles> request = new HttpEntity<>(amaraSubtitlesIn, client.getPostHeaders());
