@@ -1,8 +1,5 @@
 package nl.vpro.amara.domain;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -12,34 +9,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Subtitles {
-    private final static Logger LOG = LoggerFactory.getLogger(Subtitles.class);
 
     String action; // only used for post, possible values: complete
-
     String version_number; // version number for the subtitles
     String subtitles; // Subtitle data (str)
     String sub_format; // Format of the subtitles
     Language language; // Language data
 
-    @Override
-    public String toString() {
-        return "AmaraSubtitles{" +
-                "action='" + action + '\'' +
-                ", version_number='" + version_number + '\'' +
-                ", subtitles='" + subtitles + '\'' +
-                ", sub_format='" + sub_format + '\'' +
-                ", language=" + language +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", metadata='" + metadata + '\'' +
-                ", video_title='" + video_title + '\'' +
-                ", video_description='" + video_description + '\'' +
-                ", resource_uri='" + resource_uri + '\'' +
-                ", site_uri='" + site_uri + '\'' +
-                ", video='" + video + '\'' +
-                ", version_no='" + version_no + '\'' +
-                '}';
-    }
 
     String title; // Video title, translated into the subtitle’s language
     String description; // Video description, translated into the subtitle’s language
@@ -173,5 +149,26 @@ public class Subtitles {
 
     public void setVersion_no(String version_no) {
         this.version_no = version_no;
+    }
+
+
+    @Override
+    public String toString() {
+        return "AmaraSubtitles{" +
+            "action='" + action + '\'' +
+            ", version_number='" + version_number + '\'' +
+            ", subtitles='" + subtitles + '\'' +
+            ", sub_format='" + sub_format + '\'' +
+            ", language=" + language +
+            ", title='" + title + '\'' +
+            ", description='" + description + '\'' +
+            ", metadata='" + metadata + '\'' +
+            ", video_title='" + video_title + '\'' +
+            ", video_description='" + video_description + '\'' +
+            ", resource_uri='" + resource_uri + '\'' +
+            ", site_uri='" + site_uri + '\'' +
+            ", video='" + video + '\'' +
+            ", version_no='" + version_no + '\'' +
+            '}';
     }
 }

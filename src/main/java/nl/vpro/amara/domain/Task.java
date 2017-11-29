@@ -1,5 +1,7 @@
 package nl.vpro.amara.domain;
 
+import lombok.ToString;
+
 import java.time.Instant;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -13,8 +15,9 @@ import nl.vpro.amara.domain.json.UserJson;
  * @author joost
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
+@ToString
 public class Task {
-     
+
 
     public final static String TASK_APPROVED = "Approved";
 
@@ -106,21 +109,6 @@ public class Task {
     public void setResource_uri(String resource_uri) {
         this.resource_uri = resource_uri;
     }
-
-    @Override
-    public String toString() {
-        return "AmaraTask{" +
-                "video_id='" + video_id + '\'' +
-                ", language='" + language + '\'' +
-                ", type='" + type + '\'' +
-                ", assignee='" + assignee + '\'' +
-                ", priority=" + priority +
-                ", completed=" + completed +
-                ", approved='" + approved + '\'' +
-                ", resource_uri='" + resource_uri + '\'' +
-                '}';
-    }
-
 
 
 

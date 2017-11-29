@@ -1,8 +1,11 @@
 package nl.vpro.amara.domain;
 
+import lombok.Data;
+
 /**
  * @author joost
  */
+@Data
 public class SubtitleAction {
 
     final public static String ACTION_COMPLETE = "complete";
@@ -17,12 +20,4 @@ public class SubtitleAction {
         this.action = action;
     }
 
-
-    public String getAction() {
-        return action;
-    }
-
-    public void setAction(String action) {
-        this.action = action;
-    }
 }
