@@ -91,4 +91,11 @@ public class VideosClientTest extends AbstractClientsTest {
         log.info("" + subtitles);
     }
 
+
+    @Test
+    public void getVideo() {
+        Video video = client.videos().get("CbrxZpYTHG2j");
+        log.info("" + video);
+    }
+
 }

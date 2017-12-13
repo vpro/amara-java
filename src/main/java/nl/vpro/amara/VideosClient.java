@@ -91,6 +91,7 @@ public class VideosClient extends SubClient {
                 language_code,
                 "subtitles",
                 "actions")
+            .path("/")
             .build().encode().toUri();
 
         ResponseEntity<Action[]> response = get(uri, Action[].class);
@@ -110,7 +111,8 @@ public class VideosClient extends SubClient {
                     video_id,
                     "languages",
                     language_code,
-                    "subtitles/")
+                    "subtitles")
+                .path("/")
                 .queryParam("team", client.getTeam())
                 .queryParam("format", format)
                 .build().encode().toUri();
@@ -142,7 +144,8 @@ public class VideosClient extends SubClient {
                     video_id,
                     "languages",
                     language_code,
-                    "subtitles/")
+                    "subtitles")
+                .path("/")
             //                    .queryParam("team", client.getTeam())
                 .queryParam("sub_format", format)
                 .build().encode().toUri();
@@ -164,6 +167,7 @@ public class VideosClient extends SubClient {
     public Video get(String video_id) {
         URI uri = builder()
             .pathSegment(video_id)
+            .path("/")
             .queryParam("team", client.getTeam())
             .build().encode().toUri();
 

@@ -33,7 +33,6 @@ public class TeamsClient extends SubClient {
 
         URI uri = uri(
             tasks()
-                .path("/")
                 .queryParam("type", taskType.name())
                 .queryParam("limit", limit)
                 .queryParam("offset", offset)
@@ -58,7 +57,7 @@ public class TeamsClient extends SubClient {
     public Task post(Task amaraTaskIn) {
         Task amaraTaskOut = null;
         try {
-            URI uri = uri(tasks().path("/"));
+            URI uri = uri(tasks());
             ResponseEntity<Task> response = post(uri, amaraTaskIn, Task.class);
 
             if (response.getStatusCode() == HttpStatus.CREATED) {
@@ -75,7 +74,9 @@ public class TeamsClient extends SubClient {
 
     private UriComponentsBuilder tasks() {
         return builder()
-            .pathSegment(client.getTeam(), "tasks");
+            .pathSegment(client.getTeam(), "tasks")
+            .path("/")
+            ;
     }
 
 
