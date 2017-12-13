@@ -110,7 +110,7 @@ public class VideosClient extends SubClient {
                     video_id,
                     "languages",
                     language_code,
-                    "subtitles")
+                    "subtitles/")
                 .queryParam("team", client.getTeam())
                 .queryParam("format", format)
                 .build().encode().toUri();
@@ -142,7 +142,7 @@ public class VideosClient extends SubClient {
                     video_id,
                     "languages",
                     language_code,
-                    "subtitles")
+                    "subtitles/")
             //                    .queryParam("team", client.getTeam())
                 .queryParam("sub_format", format)
                 .build().encode().toUri();

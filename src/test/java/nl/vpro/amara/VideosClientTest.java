@@ -87,7 +87,7 @@ public class VideosClientTest extends AbstractClientsTest {
 
     @Test
     public void getSubtitles() {
-        Subtitles subtitles = client.videos().getSubtitles("TusUXJhLvSyZ", "ar", "vtt");
+        Subtitles subtitles = client.videos().getSubtitles("CbrxZpYTHG2j", "ar", "vtt");
         log.info("" + subtitles);
     }
 
