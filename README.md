@@ -40,6 +40,6 @@ Or you can add this to your pom.xml
 <dependency>
   <groupId>nl.vpro.amara</groupId>
   <artifactId>amara-java</artifactId>
-  <version>0.5</version>
+  <version>0.7</version>
 </dependency>
 ```
