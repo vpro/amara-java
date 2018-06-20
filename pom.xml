@@ -165,7 +165,8 @@
         <version>3.0.1</version>
         <configuration>
           <failOnError>false</failOnError>
-          <additionalparam>-Xdoclint:none</additionalparam>
+          <doclint>none</doclint>
+          <additionalJOption>-quiet</additionalJOption>
         </configuration>
       </plugin>
     </plugins>
