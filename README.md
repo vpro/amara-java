@@ -1,6 +1,6 @@
 # Amara Java Client
 [![Build Status](https://travis-ci.org/vpro/amara-java.svg?)](https://travis-ci.org/vpro/amara-java)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/nl.vpro.amara/amara-java/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/nl.vpro.amara/amara-java)
+[![Maven Central](https://img.shields.io/maven-central/v/nl.vpro.amara/amara-java.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22nl.vpro.amara%22%20AND%20a:%22amara-java%22)
 
 
 This is a simple java client for the amara project (http://www.amara.org/). It isn't yet complete, but methods can easilty be added. The API itself is documented [here](https://amara.org/api/ "Amara API documentation") (You need to be logged in)
