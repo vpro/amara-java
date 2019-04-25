@@ -1,5 +1,7 @@
 package nl.vpro.amara.domain;
 
+import lombok.Data;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -8,11 +10,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  * @author joost
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Data
 public class Subtitles {
 
     String action; // only used for post, possible values: complete
     String version_number; // version number for the subtitles
-    String subtitles; // Subtitle data (str)
+    String subtitles; // Subtitle data
     String sub_format; // Format of the subtitles
     Language language; // Language data
 
