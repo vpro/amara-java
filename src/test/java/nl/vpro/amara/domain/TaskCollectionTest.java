@@ -49,7 +49,7 @@ public class TaskCollectionTest {
     @Test
     public void json() throws IOException {
         TaskCollection collection = AmaraObjectMapper.INSTANCE.readerFor(TaskCollection.class).readValue(new StringReader(example));
-        assertThat(collection.getTasks().get(0).getAssignee().getUri().toString()).isEqualTo("https://amara.org/api/users/id$WsywnFE7KZ1gJQOHSEFoXaq8xGpqCnjBKudT2wdOYdU/");
+        assertThat(collection.getObjects().get(0).getAssignee().getUri().toString()).isEqualTo("https://amara.org/api/users/id$WsywnFE7KZ1gJQOHSEFoXaq8xGpqCnjBKudT2wdOYdU/");
     }
 
 

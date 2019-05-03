@@ -1,5 +1,6 @@
 package nl.vpro.amara.domain;
 
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.regex.Pattern;
@@ -13,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @Slf4j
+@Data
 public class Video {
 
     private String id;
@@ -42,101 +44,8 @@ public class Video {
         this.metadata = metadata;
     }
 
-    public String getId() {
-        return id;
-    }
 
-    public void setId(String id) {
-        this.id = id;
-    }
 
-    public String getVideo_url() {
-        return video_url;
-    }
-
-    public void setVideo_url(String video_url) {
-        this.video_url = video_url;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-//    public String getDuration() {
-//        return duration;
-//    }
-//
-//    public void setDuration(String duration) {
-//        this.duration = duration;
-//    }
-
-    public String getPrimary_audio_language_code() {
-        return primary_audio_language_code;
-    }
-
-    public void setPrimary_audio_language_code(String primary_audio_language_code) {
-        this.primary_audio_language_code = primary_audio_language_code;
-    }
-
-    public String getThumbnail() {
-        return thumbnail;
-    }
-
-    public void setThumbnail(String thumbnail) {
-        this.thumbnail = thumbnail;
-    }
-
-    public VideoMetadata getMetadata() {
-        return metadata;
-    }
-
-    public void setMetadata(VideoMetadata metadata) {
-        this.metadata = metadata;
-    }
-
-    public String getTeam() {
-        return team;
-    }
-
-    public void setTeam(String team) {
-        this.team = team;
-    }
-
-    public String getProject() {
-        return project;
-    }
-
-    public void setProject(String project) {
-        this.project = project;
-    }
-
-    public Language getAmaraLanguage() {
-        return amaraLanguage;
-    }
-
-    public void setAmaraLanguage(Language amaraLanguage) {
-        this.amaraLanguage = amaraLanguage;
-    }
-
-    public String[] getAll_urls() {
-        return all_urls;
-    }
-
-    public void setAll_urls(String[] all_urls) {
-        this.all_urls = all_urls;
-    }
 
     @Override
     public String toString() {

@@ -49,7 +49,7 @@ public class TeamsClient extends SubClient {
     public Iterator<Task> getTasks(TaskType taskType, Instant after) {
         return BatchedReceiver.<Task>builder()
             .batchSize(100)
-            .batchGetter((offset, max) -> getTasks(taskType, after, offset, max).getTasks().iterator())
+            .batchGetter((offset, max) -> getTasks(taskType, after, offset, max).getObjects().iterator())
             .build();
 
     }

@@ -1,5 +1,7 @@
 package nl.vpro.amara.domain;
 
+import lombok.Data;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -9,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-
+@Data
 public class VideoMetadata {
 
     @JsonProperty("speaker-name")
@@ -24,22 +26,6 @@ public class VideoMetadata {
         this.location = location;
     }
 
-
-    public String getSpeaker_name() {
-        return speaker_name;
-    }
-
-    public void setSpeaker_name(String speaker_name) {
-        this.speaker_name = speaker_name;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
 
     @Override
     public String toString() {
