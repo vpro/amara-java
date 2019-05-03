@@ -4,7 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.net.URI;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
+import java.util.function.Supplier;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -13,10 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import nl.vpro.amara.domain.Action;
-import nl.vpro.amara.domain.SubtitleAction;
-import nl.vpro.amara.domain.Subtitles;
-import nl.vpro.amara.domain.Video;
+import nl.vpro.amara.domain.*;
+import nl.vpro.util.BatchedReceiver;
 
 /**
  * Returned by Client#videos(). No need to instantiate this yourself.
@@ -36,20 +36,36 @@ public class VideosClient extends SubClient {
      * See <a href="https://amara.org/api/videos/">amara doc</a>
      * TODO unfinished
      */
-    public void list() {
+    public Iterator<Video> list() {
 
-        HttpEntity<?> request = new HttpEntity<>(client.getGetHeaders());
-        RestTemplate restTemplate = new RestTemplate();
-        //HttpEntity<String> response = restTemplate.exchange(getUriForGetAndPostVideos(), HttpMethod.GET, request, String.class);
-        //LOG.info(String.valueOf(response));
+        URI uri = builder()
+            .path("/")
+            .queryParam("team", client.getTeam())
+            .build()
+            .encode()
+            .toUri();
 
-//        RestTemplate restTemplate = new RestTemplate();
-//        HttpEntity<String> request = new HttpEntity<String>(headers);
-//        ResponseEntity<AmaraVideo[]> response = restTemplate.exchange(builder.build().encode().toUri(), HttpMethod.GET, request, AmaraVideo[].class);
-//        AmaraVideo[] amaraVideos = response.getBody();
 
-//        AmaraVideo amaraVideo = restTemplate.getForObject(url, AmaraVideo.class);
-//        logger.info(amaraVideo.toString());
+        return
+            BatchedReceiver.<Video>builder()
+                .batchGetter(new Supplier<Iterator<Video>>() {
+                    ResponseEntity<VideoCollection> response;
+                    @Override
+                    public Iterator<Video> get() {
+                        if (response == null) {
+                            response = VideosClient.this.get(uri, VideoCollection.class);
+                        } else {
+                            String nextUrl = response.getBody().getMeta().getNext();
+                            if (nextUrl == null) {
+                                return null;
+                            }
+                            response = VideosClient.this.get(URI.create(nextUrl), VideoCollection.class);
+                        }
+                        return response.getBody().getObjects().iterator();
+
+                    }
+                })
+                .build();
     }
 
 

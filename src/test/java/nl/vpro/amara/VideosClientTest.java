@@ -3,6 +3,7 @@ package nl.vpro.amara;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
+import java.util.Iterator;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -98,4 +99,14 @@ public class VideosClientTest extends AbstractClientsTest {
         log.info("" + video);
     }
 
+
+
+    @Test
+
+    public void list() {
+        Iterator<Video> video = client.videos().list();
+        video.forEachRemaining((v) -> {
+            log.info("" + v);
+        });
+    }
 }
