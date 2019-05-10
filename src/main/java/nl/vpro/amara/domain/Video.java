@@ -99,5 +99,12 @@ public class Video {
         return pomsMid;
     }
 
+    public String getPomsMid() {
+        if (getMetadata() != null && getMetadata().getLocation() != null) {
+            return getMetadata().getLocation();
+        }
+        return getPomsMidFromVideoUrl();
+    }
+
 }
 
