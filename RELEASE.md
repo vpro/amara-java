@@ -1,0 +1,5 @@
+
+
+```bash
+mvn -Pdeploy release:prepare release:perform -DreleaseVersion=0.9 -DdevelopmentVersion=0.10-SNAPSHOT
+```
