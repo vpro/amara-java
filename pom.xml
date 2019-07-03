@@ -58,7 +58,7 @@
     <!-- TODO, drop spring dependency, I don't see the point. This is a straight forward rest-client,
      why would we tolerate a spring dependeny
      -->
-    <vpro.shared.version>2.6.2</vpro.shared.version>
+    <vpro.shared.version>2.7.0</vpro.shared.version>
     <slf4j.version>1.7.25</slf4j.version>
     <lombok.version>1.18.8</lombok.version>
     <assertj.version>3.12.2</assertj.version>
