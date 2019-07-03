@@ -24,5 +24,6 @@ public class AbstractClientsTest {
         .team(PROPERTIES.getProperty("amara.api.team", "netinnederland"))
         .user(PROPERTIES.getProperty("amara.api.user", "netinnl"))
         .apiKey(PROPERTIES.getProperty("amara.api.key"))
+        .futureVersion(Client.FUTURE_VERSION)
         .build();
 }

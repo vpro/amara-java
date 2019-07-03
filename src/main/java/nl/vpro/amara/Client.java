@@ -2,6 +2,7 @@ package nl.vpro.amara;
 
 
 import lombok.Builder;
+import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -14,24 +15,31 @@ import org.springframework.http.MediaType;
  * @author Michiel Meeuwissen
  * @since 1.2
  */
+@Slf4j
 public class Client {
 
+    public static String FUTURE_VERSION = "20190619";
 
     private final String amaraUrl;
     private final String username;
     private final String apiKey;
     private final String team;
+    private final String futureVersion;
 
     private final VideosClient videos = new VideosClient(this);
     private final ActivityClient activity = new ActivityClient(this);
     private final TeamsClient teams = new TeamsClient(this);
 
     @Builder
-    public Client(String url, String user, String apiKey, String team) {
+    public Client(String url, String user, String apiKey, String team, String futureVersion) {
         this.amaraUrl = url;
         this.username = user;
         this.apiKey = apiKey;
         this.team = team;
+        this.futureVersion = futureVersion;
+        if (this.futureVersion != null) {
+            log.info("Using FUTURE VERSION {}", this.futureVersion);
+        }
 
     }
 
@@ -66,7 +74,7 @@ public class Client {
 
     protected HttpHeaders getGetHeaders() {
         HttpHeaders headers = new HttpHeaders();
-        authenticate(headers);
+        genericHeaders(headers);
         return headers;
     }
 
@@ -74,13 +82,20 @@ public class Client {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Accept", MediaType.APPLICATION_JSON_VALUE);
         headers.add("Content-Type", MediaType.APPLICATION_JSON_VALUE);
-        authenticate(headers);
+        genericHeaders(headers);
         return headers;
     }
 
     protected void authenticate(HttpHeaders headers) {
         headers.add("X-api-username", username);
         headers.add("X-api-key", apiKey);
+    }
+
+    protected void genericHeaders(HttpHeaders headers) {
+        authenticate(headers);
+        if (futureVersion != null) {
+            headers.add("X-API-FUTURE", futureVersion);
+        }
     }
 
 

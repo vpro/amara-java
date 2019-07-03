@@ -12,7 +12,7 @@ public class SubClientTest {
     @Test
     public void builder() throws Exception {
         SubClient client = new SubClient(
-            new Client("https://amara.org", null, null, null), "test") {
+            new Client("https://amara.org", null, null, null, null), "test") {
         };
 
         URI uri = client.builder()
