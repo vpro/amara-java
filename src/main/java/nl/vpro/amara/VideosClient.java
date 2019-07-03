@@ -8,10 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Supplier;
 
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
@@ -188,6 +185,8 @@ public class VideosClient extends SubClient {
             .build().encode().toUri();
 
         ResponseEntity<Video> response = get(uri, Video.class);
+        HttpHeaders headers = response.getHeaders();
+        log.info("headers {}", headers);
         return response.getBody();
     }
 

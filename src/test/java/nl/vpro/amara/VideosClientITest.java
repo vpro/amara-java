@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.IOException;
 import java.util.Iterator;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import nl.vpro.amara.domain.Subtitles;
@@ -16,9 +15,9 @@ import nl.vpro.amara.domain.VideoMetadata;
  * @author Michiel Meeuwissen
  * @since 0.2
  */
-@Ignore("This is integration test requiring actual key in ~/conf/amara.properties")
+//@Ignore("This is integration test requiring actual key in ~/conf/amara.properties")
 @Slf4j
-public class VideosClientTest extends AbstractClientsTest {
+public class VideosClientITest extends AbstractClientsTest {
 
     public static String example = "{\"video_url\":\"http://download.omroep.nl/vpro/netinnederland/hasp/WO_NTR_425175.mp4\",\"title\":\"De invloed van de SER // Adviezen en regeringsbeleid\",\"description\":\"De Sociaal Economische Raad (SER) adviseert de regering over belangrijke dingen, zoals de WAO en de ziektekostenwet.\",\"primary_audio_language_code\":\"nl\",\"thumbnail\":\"http://images-test.poms.omroep.nl/image/32071124.jpg\",\"metadata\":{\"location\":\"WO_NTR_425175\",\"speaker-name\":\"De invloed van de SER\"},\"team\":\"netinnederland-staging\",\"project\":\"current\"}";
 

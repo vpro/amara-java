@@ -6,7 +6,6 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.Iterator;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import nl.vpro.amara.domain.Task;
@@ -15,9 +14,9 @@ import nl.vpro.amara.domain.TaskType;
 /**
  * @author Michiel Meeuwissen
  */
-@Ignore("This is integration test requiring actual key in ~/conf/amara.properties")
+//@Ignore("This is integration test requiring actual key in ~/conf/amara.properties")
 @Slf4j
-public class TeamsClientTest extends AbstractClientsTest {
+public class TeamsClientITest extends AbstractClientsTest {
 
 
 
