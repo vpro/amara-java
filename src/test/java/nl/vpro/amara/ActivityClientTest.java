@@ -1,20 +1,15 @@
 package nl.vpro.amara;
 
-import java.io.IOException;
-import java.time.Duration;
-import java.time.Instant;
-import java.util.List;
-
-import org.junit.Ignore;
-import org.junit.Test;
-
 import nl.vpro.amara.domain.Activity;
-import nl.vpro.amara.domain.Task;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
 
 /**
  * @author Michiel Meeuwissen
  */
-@Ignore("This is integration test requiring actual key in ~/conf/amara.properties")
+@Disabled("This is integration test requiring actual key in ~/conf/amara.properties")
 public class ActivityClientTest extends AbstractClientsTest {
 
 
@@ -25,7 +20,7 @@ public class ActivityClientTest extends AbstractClientsTest {
 
 
     }
-    
-    
-    
+
+
+
 }

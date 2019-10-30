@@ -1,8 +1,8 @@
 package nl.vpro.amara;
 
-import java.net.URI;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import java.net.URI;
 
 /**
  * @author Michiel Meeuwissen

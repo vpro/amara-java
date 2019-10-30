@@ -1,10 +1,9 @@
 package nl.vpro.amara.domain;
 
-import java.io.IOException;
-
-import org.junit.Test;
-
 import nl.vpro.amara.AmaraObjectMapper;
+import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

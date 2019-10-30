@@ -4,15 +4,14 @@ package nl.vpro.amara;
  * @author joost
  */
 
-import java.io.IOException;
-import java.time.Instant;
-
-import org.junit.Test;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
+import java.time.Instant;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

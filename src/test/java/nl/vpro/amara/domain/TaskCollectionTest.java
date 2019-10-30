@@ -1,12 +1,11 @@
 package nl.vpro.amara.domain;
 
+import nl.vpro.amara.AmaraObjectMapper;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+
 import java.io.IOException;
 import java.io.StringReader;
-
-import org.junit.Ignore;
-import org.junit.Test;
-
-import nl.vpro.amara.AmaraObjectMapper;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -15,7 +14,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
  * @author Michiel Meeuwissen
 
  */
-@Ignore
+@Disabled
 public class TaskCollectionTest {
 
 

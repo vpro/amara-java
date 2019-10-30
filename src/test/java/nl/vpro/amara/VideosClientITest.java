@@ -1,15 +1,13 @@
 package nl.vpro.amara;
 
 import lombok.extern.slf4j.Slf4j;
-
-import java.io.IOException;
-import java.util.Iterator;
-
-import org.junit.Test;
-
 import nl.vpro.amara.domain.Subtitles;
 import nl.vpro.amara.domain.Video;
 import nl.vpro.amara.domain.VideoMetadata;
+import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
+import java.util.Iterator;
 
 /**
  * @author Michiel Meeuwissen
