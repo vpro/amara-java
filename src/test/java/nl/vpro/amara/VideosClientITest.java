@@ -1,13 +1,13 @@
 package nl.vpro.amara;
 
 import lombok.extern.slf4j.Slf4j;
-import nl.vpro.amara.domain.Subtitles;
-import nl.vpro.amara.domain.Video;
-import nl.vpro.amara.domain.VideoMetadata;
-import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.Iterator;
+
+import org.junit.jupiter.api.Test;
+
+import nl.vpro.amara.domain.*;
 
 /**
  * @author Michiel Meeuwissen
@@ -33,6 +33,20 @@ public class VideosClientITest extends AbstractClientsTest {
         "  \"project\" : \"current\"\n" +
         "}";
 
+    public static String anothervideo = "{\n" +
+        "  \"video_url\" : \"http://download.omroep.nl/vpro/netinnederland/nep/WO_NTR_15925207.mp4?a\",\n" +
+        //"  \"video_url\" : \"http://download.omroep.nl/vpro/netinnederland/hasp/WO_NTR_425175.mp4\",\n" +
+        "  \"title\" : \"Fragment NOS: Op vakantie naar Syrie\",\n" +
+        "  \"description\" : \"Op vakantie naar Syrie\",\n" +
+        "  \"primary_audio_language_code\" : \"nl\",\n" +
+        //"  \"thumbnail\" : \"http://images.poms.omroep.nl/image/s620/1329508.jpg\",\n" +
+        "  \"metadata\" : {\n" +
+        "    \"location\" : \"WO_NTR_15925207\",\n" +
+        "    \"speaker-name\" : \"Fragment NOS: Op vakantie naar Syrie\"\n" +
+        "  },\n" +
+        "  \"team\" : \"netinnederland\",\n" +
+        "  \"project\" : \"current\"\n" +
+        "}";
 
 
     @Test
@@ -76,9 +90,9 @@ public class VideosClientITest extends AbstractClientsTest {
     @Test
     // GIVES 504. I don't know why.
     public void postVideo() throws IOException {
-        Video in = AmaraObjectMapper.INSTANCE.readerFor(Video.class).readValue(video);
+        Video in = AmaraObjectMapper.INSTANCE.readerFor(Video.class).readValue(anothervideo);
         //
-        System.out.println(video);
+        System.out.println(anothervideo);
         System.out.println(client.videos().post(in));
 
     }
