@@ -1,18 +1,20 @@
 package nl.vpro.amara;
 
 import lombok.extern.slf4j.Slf4j;
-import nl.vpro.amara.domain.Task;
-import nl.vpro.amara.domain.TaskType;
-import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Iterator;
 
+import org.junit.jupiter.api.Test;
+
+import nl.vpro.amara.domain.Task;
+import nl.vpro.amara.domain.TaskType;
+
 /**
  * @author Michiel Meeuwissen
  */
-//@Ignore("This is integration test requiring actual key in ~/conf/amara.properties")
+//@Disabled("This is integration test requiring actual key in ~/conf/amara.properties")
 @Slf4j
 public class TeamsClientITest extends AbstractClientsTest {
 
