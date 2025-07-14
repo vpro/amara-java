@@ -2,7 +2,6 @@ package nl.vpro.amara;
 
 import java.net.URI;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import nl.vpro.amara.domain.Activity;
@@ -33,7 +32,6 @@ public class ActivityClient extends SubClient {
         ResponseEntity<ActivityCollection> response = get(uri,  ActivityCollection.class);
         ActivityCollection amaryActivityCollection = response.getBody();
 
-        HttpStatus httpStatus = response.getStatusCode();
 
         //LOG.info(String.valueOf(response));
 
@@ -50,7 +48,6 @@ public class ActivityClient extends SubClient {
         ResponseEntity<ActivityCollection> response = get(uri, ActivityCollection.class);
         ActivityCollection amaryActivityCollection = response.getBody();
 
-        HttpStatus httpStatus = response.getStatusCode();
         //LOG.info(String.valueOf(response));
 
         return amaryActivityCollection;

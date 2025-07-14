@@ -42,7 +42,6 @@ public class TeamsClient extends SubClient {
         ResponseEntity<TaskCollection> response = get(uri, TaskCollection.class);
         TaskCollection tasks = response.getBody();
         log.debug("Total size: {}", tasks.getMeta().getTotal_count());
-        HttpStatus httpStatus = response.getStatusCode();
         return tasks;
     }
 
