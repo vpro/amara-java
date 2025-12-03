@@ -7,10 +7,10 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     env:
-      MAVEN_OPTS: '-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn'
+      MAVEN_ARGS: '--no-transfer-progress'
     steps:
-    - uses: actions/checkout@v3
-    - uses: oleksiyrudenko/gha-git-credentials@v2.1
+    - uses: actions/checkout@v6
+    - uses: oleksiyrudenko/gha-git-credentials@v2-latest
       with:
         global: true
         name: 'github $GITHUB_ACTOR'
