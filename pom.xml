@@ -54,7 +54,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <jackson2.version>2.20.1</jackson2.version>
-    <spring.version>6.2.14</spring.version>
+    <spring.version>6.2.19</spring.version>
     <!-- TODO, drop spring dependency, I don't see the point. This is a straight forward rest-client,
      why would we tolerate a spring dependency
      -->
